@@ -28,8 +28,6 @@ Resources:
       TaskDefinition: !Ref EntityRetrieverServiceTaskDefinitionArn
   EntityHolderService:
     Type: AWS::ECS::Service
-    DependsOn:
-      Listener
     Properties:
       Cluster: !Ref ClusterId
       DesiredCount: !Ref DesiredTaskCount
