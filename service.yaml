@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Template for the dummy service
+Parameters:
+  ClusterId:
+    Default: hackathon-march-ecs-cluster
+    Description: ECS Cluster in which the service will be running.
+    Type: String
+  EntityRetrieverServiceTaskDefinitionArn:
+    Default: "arn:aws:ecs:eu-west-2:415297152241:task-definition/entity-retriever-service-definition:5"
+    Description: Task definition arn for the Entity Retriever service.
+    Type: String
+  EntityHolderServiceTaskDefinitionArn:
+    Default: "arn:aws:ecs:eu-west-2:415297152241:task-definition/entity-holder-service-definition:5"
+    Description: Task definition arn for the Entity Holder service.
+    Type: String
+  DesiredTaskCount:
+    Default: 1
+    Description: Desired number of tasks to run in the service.
+    Type: Number
+Resources:
+  EntityRetrieverService:
+    Type: AWS::ECS::Service
+    DependsOn:
+      EntityHolderService
+    Properties:
+      Cluster: !Ref ClusterId
+      DesiredCount: !Ref DesiredTaskCount
+      TaskDefinition: !Ref EntityRetrieverServiceTaskDefinitionArn
+  EntityHolderService:
+    Type: AWS::ECS::Service
+    DependsOn:
+      Listener
+    Properties:
+      Cluster: !Ref ClusterId
+      DesiredCount: !Ref DesiredTaskCount
+      TaskDefinition: !Ref EntityHolderServiceTaskDefinitionArn
