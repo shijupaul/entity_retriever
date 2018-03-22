@@ -6,7 +6,7 @@ Parameters:
     Description: ECS Cluster in which the service will be running.
     Type: String
   EntityRetrieverServiceTaskDefinitionArn:
-    Default: "arn:aws:ecs:eu-west-2:415297152241:task-definition/entity-retriever-service-definition:2"
+    Default: "arn:aws:ecs:eu-west-2:415297152241:task-definition/entity-retriever-service-definition:3"
     Description: Task definition arn for the Entity Retriever service.
     Type: String
   EntityHolderServiceTaskDefinitionArn:
